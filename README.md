@@ -51,7 +51,5 @@ It allows users to enter event details, automatically generate a unique **Ticket
 Event-Pass-Generator/
 │
 ├── index.html        # Main HTML file
-├── style.css         # (Optional) Extracted CSS styling
-├── script.js         # (Optional) Extracted JavaScript logic
 └── README.md         # Project documentation
 
