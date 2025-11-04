@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Pass Generator</title>
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: #fff;
+      padding: 25px;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      width: 400px;
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #ff4b2b;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      width: 100%;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #ff416c;
+    }
+
+    .ticket {
+      display: none;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      text-align: left;
+      position: relative;
+    }
+
+    .ticket h2 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .ticket p {
+      margin: 5px 0;
+    }
+
+    #qrcode {
+      margin-top: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎫 Event Pass Generator</h1>
+    <form id="ticketForm">
+      <div class="form-group">
+        <label>Your Name:</label>
+        <input type="text" id="name" required>
+      </div>
+      <div class="form-group">
+        <label>Event Name:</label>
+        <input type="text" id="event" required>
+      </div>
+      <div class="form-group">
+        <label>Venue:</label>
+        <input type="text" id="venue" required>
+      </div>
+      <div class="form-group">
+        <label>Date:</label>
+        <input type="date" id="date" required>
+      </div>
+      <div class="form-group">
+        <label>Seat Type:</label>
+        <select id="seatType" required>
+          <option value="VIP">VIP</option>
+          <option value="Regular">Regular</option>
+        </select>
+      </div>
+      <button type="submit">Generate Event Pass</button>
+    </form>
+
+    <div id="output" class="ticket">
+      <h2>🎵 Event Pass</h2>
+      <div id="ticketContent"></div>
+      <div id="qrcode"></div>
+      <button id="downloadPDF">Download PDF</button>
+    </div>
+  </div>
+
+  <!-- jsPDF CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- QRCode.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    document.getElementById("ticketForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const event = document.getElementById("event").value;
+      const venue = document.getElementById("venue").value;
+      const date = document.getElementById("date").value;
+      const seatType = document.getElementById("seatType").value;
+
+      const ticketID = Math.floor(100000 + Math.random() * 900000);
+
+      const content = `
+        <p><strong>Ticket ID:</strong> ${ticketID}</p>
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Event:</strong> ${event}</p>
+        <p><strong>Venue:</strong> ${venue}</p>
+        <p><strong>Date:</strong> ${date}</p>
+        <p><strong>Seat Type:</strong> ${seatType}</p>
+      `;
+      document.getElementById("ticketContent").innerHTML = content;
+
+      // Generate QR code
+      document.getElementById("qrcode").innerHTML = "";
+      new QRCode(document.getElementById("qrcode"), {
+        text: `TicketID:${ticketID}|Name:${name}|Event:${event}|Seat:${seatType}`,
+        width: 100,
+        height: 100
+      });
+
+      document.getElementById("output").style.display = "block";
+
+      document.getElementById("downloadPDF").onclick = function() {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        doc.setFont("helvetica", "bold");
+        doc.text("🎵 EVENT PASS", 70, 20);
+        doc.setFont("helvetica", "normal");
+        doc.text(`Ticket ID: ${ticketID}`, 20, 40);
+        doc.text(`Name: ${name}`, 20, 50);
+        doc.text(`Event: ${event}`, 20, 60);
+        doc.text(`Venue: ${venue}`, 20, 70);
+        doc.text(`Date: ${date}`, 20, 80);
+        doc.text(`Seat Type: ${seatType}`, 20, 90);
+        doc.save(`EventPass_${ticketID}.pdf`);
+      };
+    });
+  </script>
+</body>
+</html>
