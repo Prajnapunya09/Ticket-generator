@@ -46,14 +46,6 @@ It allows users to enter event details, automatically generate a unique **Ticket
 
 ---
 
-## 🛠️ Setup Instructions  
-
-1. **Clone or Download** this repository  
-   ```bash
-   git clone https://github.com/yourusername/Event-Pass-Generator.git
-
-   ---
-
 ## File structure
 
 Event-Pass-Generator/
