@@ -26,8 +26,6 @@ It allows users to enter event details, automatically generate a unique **Ticket
 
 ---
 
-
-
 ## 🧠 How It Works  
 
 1. Enter your **name**, **event name**, **venue**, **date**, and **seat type**.  
