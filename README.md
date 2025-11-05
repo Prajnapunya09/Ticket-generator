@@ -28,8 +28,7 @@ It allows users to enter event details, automatically generate a unique **Ticket
 
 ## 📸 Output Preview  
 
-### 🎟️ Example Event Pass  
-![Event Pass Preview](https://github.com/yourusername/Event-Pass-Generator/blob/main/event-pass-output.jpg)  
+### 🎟️ Example Event Pass
 
 
 
