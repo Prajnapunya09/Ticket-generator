@@ -30,7 +30,7 @@ It allows users to enter event details, automatically generate a unique **Ticket
 
 ### 🎟️ Example Event Pass  
 ![Event Pass Preview](https://github.com/yourusername/Event-Pass-Generator/blob/main/event-pass-output.jpg)  
-*(Replace the above link with your actual screenshot if available)*  
+
 
 
 ## 🧠 How It Works  
