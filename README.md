@@ -26,10 +26,6 @@ It allows users to enter event details, automatically generate a unique **Ticket
 
 ---
 
-## 📸 Output Preview  
-
-### 🎟️ Example Event Pass
-
 
 
 ## 🧠 How It Works  
